@@ -12,6 +12,21 @@ const app = express();
 // Loading HTML Pages using ExpressJS
 
 const dirPath = path.join(__dirname, 'Pages');
-app.use(express.static(dirPath))
+
+// First Method
+// app.use(express.static(dirPath))
+
+// Second Method
+app.get("", (req, res) => {
+    res.sendFile(`${dirPath}/index.html`)
+})
+app.get("/about", (_, res) => {
+    res.sendFile(`${dirPath}/about.html`)
+})
+
+// Creating Error Page
+app.get("*", (_, res) => {
+    res.sendFile(`${dirPath}/error.html`);
+})
 
 app.listen(4500);
