@@ -20,13 +20,25 @@ const dirPath = path.join(__dirname, 'Pages');
 app.get("", (req, res) => {
     res.sendFile(`${dirPath}/index.html`)
 })
-app.get("/about", (_, res) => {
-    res.sendFile(`${dirPath}/about.html`)
+// app.get("/about", (_, res) => {
+//     res.sendFile(`${dirPath}/about.html`)
+// })
+
+// // Creating Error Page
+// app.get("*", (_, res) => {
+//     res.sendFile(`${dirPath}/error.html`);
+// })
+
+
+// Using Template Engine to Render Dynamic Pages
+app.set("view engine", "ejs");
+app.get("/profile", (_, res) => {
+    const userData = {
+        name: 'Shashank Rai',
+        location: 'Lucknow'
+    }
+    res.render('profile', { userData });
 })
 
-// Creating Error Page
-app.get("*", (_, res) => {
-    res.sendFile(`${dirPath}/error.html`);
-})
 
 app.listen(4500);
